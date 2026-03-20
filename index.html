@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content="Houssam Elkhalifi — Automation Specialist at Automaestro" />
+  <title>Houssam Elkhalifi · Automaestro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@200;300;400&family=Space+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --taupe:         #D4CEC9;
+      --taupe-light:   #E0DBD6;
+      --taupe-dark:    #B8B2AC;
+      --charcoal:      #3A3633;
+      --charcoal-mid:  #5A5550;
+      --charcoal-light:#8A8480;
+      --bg:            #CECA C5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100%;
+      background: var(--taupe);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--charcoal);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Page wrapper ── */
+    .page {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle vignette */
+    .page::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(58,54,51,0.07) 0%, transparent 65%),
+                  radial-gradient(ellipse at 50% 100%, rgba(58,54,51,0.09) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Grain texture */
+    .page::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── Header ── */
+    .header {
+      width: 100%;
+      text-align: center;
+      padding-bottom: 36px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .brand-name {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 11px;
+      letter-spacing: 7px;
+      text-transform: uppercase;
+      color: var(--charcoal-mid);
+      margin-bottom: 28px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--charcoal);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(58,54,51,0.2);
+    }
+
+    /* Monogram fallback */
+    .avatar-monogram {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 28px;
+      color: var(--taupe);
+      letter-spacing: 1px;
+      user-select: none;
+    }
+
+    .person-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 1.5px;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .divider-line {
+      width: 24px;
+      height: 1px;
+      background: var(--charcoal-light);
+      margin: 0 auto 8px;
+      opacity: 0.5;
+    }
+
+    .person-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--charcoal-mid);
+    }
+
+    /* ── Tagline ── */
+    .tagline-block {
+      width: 100%;
+      text-align: center;
+      padding: 28px 16px 32px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.15s forwards;
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--charcoal-mid);
+      letter-spacing: 0.3px;
+      line-height: 1.7;
+    }
+
+    /* ── Links ── */
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.3s forwards;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 20px;
+      background: rgba(58,54,51,0.06);
+      border: 1px solid rgba(58,54,51,0.1);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(58,54,51,0.0);
+      transition: background 0.2s ease;
+    }
+
+    .link-btn:hover {
+      background: rgba(58,54,51,0.1);
+      border-color: rgba(58,54,51,0.18);
+      transform: translateY(-1px);
+    }
+
+    .link-btn:active {
+      transform: translateY(0px) scale(0.99);
+    }
+
+    .link-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .link-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .icon-whatsapp { background: rgba(37,211,102,0.12); }
+    .icon-email    { background: rgba(58,54,51,0.1); }
+    .icon-instagram{ background: rgba(193,53,132,0.1); }
+    .icon-linkedin { background: rgba(0,119,181,0.1); }
+
+    .link-text {
+      flex: 1;
+    }
+
+    .link-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--charcoal);
+      letter-spacing: 0.2px;
+      display: block;
+    }
+
+    .link-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      color: var(--charcoal-light);
+      letter-spacing: 0.2px;
+      margin-top: 1px;
+      display: block;
+    }
+
+    .link-arrow {
+      opacity: 0.25;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .link-btn:hover .link-arrow {
+      opacity: 0.5;
+      transform: translateX(2px);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 44px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.45s forwards;
+    }
+
+    .footer-brand {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--charcoal-light);
+      opacity: 0.6;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stagger link items */
+    .links .link-btn:nth-child(1) { opacity: 0; animation: fadeUp 0.5s ease 0.3s forwards; }
+    .links .link-btn:nth-child(2) { opacity: 0; animation: fadeUp 0.5s ease 0.38s forwards; }
+    .links .link-btn:nth-child(3) { opacity: 0; animation: fadeUp 0.5s ease 0.46s forwards; }
+    .links .link-btn:nth-child(4) { opacity: 0; animation: fadeUp 0.5s ease 0.54s forwards; }
+
+    /* Override parent animation for links container */
+    .links { animation: none; opacity: 1; }
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="header">
+        <p class="brand-name">Automaestro</p>
+        <div class="avatar">
+          <span class="avatar-monogram">HE</span>
+        </div>
+        <h1 class="person-name">Houssam Elkhalifi</h1>
+        <div class="divider-line"></div>
+        <p class="person-title">Automation Specialist</p>
+      </div>
+
+      <!-- Tagline -->
+      <div class="tagline-block">
+        <p class="tagline">"We build the systems.<br>You run the business."</p>
+      </div>
+
+      <!-- Links -->
+      <div class="links">
+
+        <!-- WhatsApp -->
+        <a class="link-btn" href="https://wa.me/212XXXXXXXXX" target="_blank" rel="noopener">
+          <div class="link-icon icon-whatsapp">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="#25D366"/>
+              <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.659 1.438 5.168L2 22l4.978-1.418A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.946 7.946 0 01-4.274-1.243l-.306-.182-3.172.904.887-3.096-.2-.318A7.956 7.956 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z" fill="#25D366"/>
+            </svg>
+          </div>
+          <div class="link-text">
+            <span class="link-label">WhatsApp</span>
+            <span class="link-sub">Send a message</span>
+          </div>
+          <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3A3633" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        <!-- Email -->
+        <a class="link-btn" href="mailto:contact@automaestro.ma" target="_blank" rel="noopener">
+          <div class="link-icon icon-email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3A3633" stroke-width="1.6">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m2 4 10 9 10-9"/>
+            </svg>
+          </div>
+          <div class="link-text">
+            <span class="link-label">Email</span>
+            <span class="link-sub">contact@automaestro.ma</span>
+          </div>
+          <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3A3633" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        <!-- Instagram -->
+        <a class="link-btn" href="https://instagram.com/automaestro.ma" target="_blank" rel="noopener">
+          <div class="link-icon icon-instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C13584" stroke-width="1.6">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="link-text">
+            <span class="link-label">Instagram</span>
+            <span class="link-sub">@automaestro.ma</span>
+          </div>
+          <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3A3633" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a class="link-btn" href="https://linkedin.com/in/houssam-elkhalifi" target="_blank" rel="noopener">
+          <div class="link-icon icon-linkedin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0077B5" stroke-width="1.6">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </div>
+          <div class="link-text">
+            <span class="link-label">LinkedIn</span>
+            <span class="link-sub">Houssam Elkhalifi</span>
+          </div>
+          <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3A3633" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p class="footer-brand">Automaestro &nbsp;·&nbsp; automaestro.vercel.app</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
