@@ -1,816 +1,637 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- ============================================================
-     Automaestro — Digital Business Card
-     Author  : Houssam Elkhalifi
-     Version : 2.0.0
-     Updated : 2025
-     ============================================================ -->
+<!--
+  Automaestro — Digital Business Card
+  Author  : Houssam Elkhalifi
+  Version : 5.0.0
+-->
 
 <head>
-  <!-- ── Encoding & viewport ── -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- ── Primary SEO ── -->
   <title>Houssam Elkhalifi | Automation Specialist — Automaestro</title>
-  <meta name="description"  content="Houssam Elkhalifi is an Automation & AI specialist at Automaestro. We build the systems. You run the business." />
-  <meta name="keywords"     content="automation, AI, make.com, business automation, Houssam Elkhalifi, Automaestro, Morocco" />
-  <meta name="author"       content="Houssam Elkhalifi" />
-  <meta name="robots"       content="index, follow" />
-  <link rel="canonical"     href="https://automaestro.vercel.app" />
+  <meta name="description" content="Houssam Elkhalifi — Automation & AI specialist at Automaestro. We build the systems. You run the business." />
+  <meta name="author"      content="Houssam Elkhalifi" />
+  <meta name="robots"      content="index, follow" />
+  <link rel="canonical"    href="https://automaestro.vercel.app" />
 
-  <!-- ── Open Graph ── -->
   <meta property="og:type"        content="profile" />
   <meta property="og:title"       content="Houssam Elkhalifi | Automaestro" />
   <meta property="og:description" content="Automation & AI specialist. We build the systems. You run the business." />
   <meta property="og:url"         content="https://automaestro.vercel.app" />
   <meta property="og:site_name"   content="Automaestro" />
-  <meta property="og:locale"      content="en_US" />
+  <meta name="twitter:card"       content="summary" />
+  <meta name="theme-color"        content="#1A1816" />
 
-  <!-- ── Twitter / X Card ── -->
-  <meta name="twitter:card"        content="summary" />
-  <meta name="twitter:title"       content="Houssam Elkhalifi | Automaestro" />
-  <meta name="twitter:description" content="Automation & AI specialist. We build the systems. You run the business." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23D4CEC9'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia' font-size='13' fill='%232C2926'%3EAM%3C/text%3E%3C/svg%3E" />
 
-  <!-- ── Mobile browser chrome color ── -->
-  <meta name="theme-color" content="#1A1816" />
-
-  <!-- ── Fonts: preconnect first, then load ── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap" rel="stylesheet" />
 
-  <!-- ── Structured data (Google rich results) ── -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Houssam Elkhalifi",
     "jobTitle": "Automation Specialist",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Automaestro",
-      "url": "https://automaestro.vercel.app"
-    },
+    "worksFor": { "@type": "Organization", "name": "Automaestro", "url": "https://automaestro.vercel.app" },
     "url": "https://automaestro.vercel.app",
-    "sameAs": [
-      "https://instagram.com/automaestro.ma",
-      "https://linkedin.com/in/houssam-elkhalifi"
-    ],
     "email": "automaestro.contact@gmail.com",
-    "description": "Automation & AI specialist. We build the systems. You run the business."
+    "sameAs": ["https://instagram.com/automaestro.ma","https://linkedin.com/in/houssam-elkhalifi"]
   }
   </script>
 
   <style>
-    /* ============================================================
-       1. DESIGN TOKENS
-       ============================================================ */
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ===== TOKENS ===== */
     :root {
-      /* Brand palette */
-      --color-taupe:          #D4CEC9;
-      --color-taupe-dark:     #B8B2AC;
-      --color-charcoal:       #2C2926;
-      --color-charcoal-mid:   #4A4642;
-      --color-charcoal-light: #7A7570;
-      --color-surface-back:   #1E1C1A;
-      --color-text-on-dark:   #F0EBE5;
-      --color-text-muted:     rgba(212, 206, 201, 0.5);
-      --color-page-bg:        #1A1816;
-
-      /* Fluid card sizing:
-         clamp(MIN, PREFERRED, MAX)
-         On mobile  → ~92vw wide, auto height
-         On desktop → capped at 600px wide        */
-      --card-width:       clamp(300px, 90vw, 600px);
-      --card-aspect:      1.75;          /* width / height ratio (standard business card is ~1.75) */
-      --card-radius:      clamp(12px, 2.5vw, 22px);
-      --card-perspective: 1200px;
-
-      /* Fluid typography — scales smoothly between screen sizes */
-      --text-wordmark:    clamp(9px,  1.8vw, 13px);
-      --text-name:        clamp(26px, 5.5vw, 48px);
-      --text-title:       clamp(7px,  1.4vw, 11px);
-      --text-tagline:     clamp(9px,  1.8vw, 13px);
-      --text-link-label:  clamp(11px, 2vw,   15px);
-      --text-link-sub:    clamp(8px,  1.4vw, 11px);
-
-      /* Fluid spacing */
-      --pad-card-front:   clamp(18px, 4vw, 36px);
-      --pad-card-back:    clamp(16px, 3.5vw, 30px);
-      --gap-links:        clamp(6px,  1.2vw, 10px);
-
-      /* Animation */
-      --duration-flip:    0.8s;
-      --duration-fade:    0.7s;
-      --easing-flip:      cubic-bezier(0.4, 0.2, 0.2, 1);
+      --taupe:      #D4CEC9;
+      --taupe-dk:   #B8B2AC;
+      --charcoal:   #2C2926;
+      --char-mid:   #4A4642;
+      --char-lt:    #7A7570;
+      --dark:       #1E1C1A;
+      --page-bg:    #1A1816;
+      --text-light: #F0EBE5;
+      --text-muted: rgba(212,206,201,0.5);
     }
 
-    /* ============================================================
-       2. RESET & BASE
-       ============================================================ */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    /* ===== PAGE ===== */
     body {
       min-height: 100dvh;
-      background-color: var(--color-page-bg);
+      background: var(--page-bg);
       font-family: 'DM Sans', sans-serif;
-      color: var(--color-taupe);
+      color: var(--taupe);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
-    }
-
-    /* Accessibility: respect user's motion preference */
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration:   0.01ms !important;
-        transition-duration:  0.01ms !important;
-      }
-    }
-
-    /* ============================================================
-       3. BACKGROUND
-       ============================================================ */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(
-        ellipse at 50% 0%,
-        rgba(212, 206, 201, 0.06) 0%,
-        transparent 60%
-      );
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ============================================================
-       4. PAGE LAYOUT
-       ============================================================ */
-    .page {
-      position: relative;
-      z-index: 1;
-      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: clamp(32px, 6vw, 64px) clamp(16px, 4vw, 32px);
-      gap: clamp(16px, 3vw, 28px);
+      gap: clamp(14px, 3vw, 24px);
+      padding: clamp(24px, 5vw, 56px) clamp(16px, 5vw, 40px);
     }
 
-    /* ============================================================
-       5. PAGE LABEL
-       ============================================================ */
-    .page__label {
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,206,201,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration:  0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ===== PAGE LABEL ===== */
+    .lbl {
       font-family: 'Space Mono', monospace;
-      font-size: clamp(8px, 1.2vw, 11px);
+      font-size: clamp(7px, 1.2vw, 10px);
       letter-spacing: 5px;
       text-transform: uppercase;
-      color: rgba(212, 206, 201, 0.28);
-      opacity: 0;
-      animation: fadeDown var(--duration-fade) ease 0.1s forwards;
+      color: rgba(212,206,201,0.25);
+      animation: fadeDown 0.6s ease forwards;
     }
 
-    /* ============================================================
-       6. CARD SCENE — 3D perspective container
-       ============================================================ */
-    .card-scene {
-      /* Width is fluid; height is derived from aspect ratio */
-      width: var(--card-width);
-      aspect-ratio: var(--card-aspect);
-      perspective: var(--card-perspective);
+    /* ===== CARD WRAPPER =====
+       Sets perspective. Width is fluid.
+       Height comes from aspect-ratio.
+    ===== */
+    .card-wrap {
+      width: clamp(280px, 86vw, 560px);
+      aspect-ratio: 1.75 / 1;
+      perspective: 1000px;
       cursor: pointer;
-      opacity: 0;
-      animation: fadeUp var(--duration-fade) ease 0.2s forwards;
-      flex-shrink: 0;
+      animation: fadeUp 0.7s ease 0.15s both;
+      /* tap highlight off on mobile */
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .card-scene:focus-visible {
-      outline: 2px solid var(--color-taupe-dark);
-      outline-offset: 6px;
-      border-radius: var(--card-radius);
-    }
-
-    /* ── Inner flipper ── */
-    .card__flipper {
+    /* ===== CARD INNER =====
+       This is the element that ROTATES.
+       transform-style: preserve-3d is mandatory.
+    ===== */
+    .card-inner {
+      position: relative;
       width: 100%;
       height: 100%;
-      position: relative;
       transform-style: preserve-3d;
-      transition: transform var(--duration-flip) var(--easing-flip);
-      will-change: transform;
+      transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+      /* Default: front visible */
+      transform: rotateY(0deg);
     }
 
-    .card-scene--flipped .card__flipper {
-      transform: rotateY(180deg) !important;
+    /* Flipped class added by JS */
+    .card-inner.flipped {
+      transform: rotateY(180deg);
     }
 
-    /* ── Shared face base ── */
-    .card__face {
+    /* ===== FACES — shared ===== */
+    .card-face {
       position: absolute;
       inset: 0;
-      border-radius: var(--card-radius);
+      border-radius: clamp(12px, 2vw, 20px);
+      overflow: hidden;
+      /* Each face hides its own back */
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      overflow: hidden;
     }
 
-    /* ============================================================
-       7. FRONT FACE
-       ============================================================ */
-    .card__face--front {
-      background-color: var(--color-taupe);
+    /* ===== FRONT ===== */
+    .card-front {
+      background: var(--taupe);
+      /* front starts at 0deg — visible by default */
+      transform: rotateY(0deg);
       box-shadow:
-        0 clamp(16px, 3vw, 36px) clamp(40px, 8vw, 90px) rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(255, 255, 255, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        0 20px 60px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(255,255,255,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.35);
     }
 
-    /* Gloss sheen */
-    .card__face--front::before {
+    .card-front::before {
       content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.2) 0%, transparent 55%);
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 22% 18%, rgba(255,255,255,0.18) 0%, transparent 55%);
       pointer-events: none;
     }
 
-    /* Depth at bottom */
-    .card__face--front::after {
+    .card-front::after {
       content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
+      position: absolute; bottom: 0; left: 0; right: 0;
       height: 45%;
-      background: linear-gradient(to top, rgba(58,54,51,0.08), transparent);
+      background: linear-gradient(to top, rgba(44,41,38,0.07), transparent);
       pointer-events: none;
     }
 
-    .card__front-inner {
-      position: relative;
-      z-index: 2;
-      padding: var(--pad-card-front);
+    .front-body {
+      position: relative; z-index: 1;
+      padding: clamp(16px, 3.5vw, 32px);
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
-    /* Front top row */
-    .card__front-top {
+    .front-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
     }
 
-    .card__wordmark {
+    .brand {
       font-family: 'DM Sans', sans-serif;
       font-weight: 200;
-      font-size: var(--text-wordmark);
+      font-size: clamp(8px, 1.6vw, 12px);
       letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: var(--color-charcoal-mid);
+      color: var(--char-mid);
     }
 
-    .card__flip-hint {
-      display: flex;
-      align-items: center;
-      gap: 4px;
+    .flip-hint {
+      display: flex; align-items: center; gap: 4px;
       font-family: 'Space Mono', monospace;
       font-size: clamp(6px, 1vw, 8px);
-      letter-spacing: 0.03em;
-      color: var(--color-charcoal-light);
-      opacity: 0.6;
+      color: var(--char-lt);
+      opacity: 0.55;
+    }
+    .flip-hint svg { width: clamp(7px, 1.2vw, 10px); height: clamp(7px, 1.2vw, 10px); }
+
+    .identity {
+      display: flex; flex-direction: column;
+      gap: clamp(4px, 0.8vw, 8px);
     }
 
-    .card__flip-hint svg {
-      width: clamp(8px, 1.4vw, 11px);
-      height: clamp(8px, 1.4vw, 11px);
-      flex-shrink: 0;
-    }
-
-    /* Identity block */
-    .card__identity {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(5px, 1vw, 9px);
-    }
-
-    .card__name {
+    .person-name {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: var(--text-name);
-      letter-spacing: 0.05em;
-      color: var(--color-charcoal);
+      font-size: clamp(24px, 5.5vw, 46px);
+      letter-spacing: 0.04em;
+      color: var(--charcoal);
       line-height: 1;
     }
 
-    .card__rule {
-      width: clamp(20px, 3.5vw, 32px);
+    .rule {
+      width: clamp(18px, 3vw, 28px);
       height: 1px;
-      background-color: var(--color-charcoal-mid);
-      opacity: 0.35;
+      background: var(--char-mid);
+      opacity: 0.3;
       border: none;
     }
 
-    .card__title {
+    .person-title {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: var(--text-title);
+      font-size: clamp(6px, 1.2vw, 10px);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--color-charcoal-mid);
+      color: var(--char-mid);
     }
 
-    /* Front bottom row */
-    .card__front-bottom {
+    .front-bottom {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
     }
 
-    .card__tagline {
+    .tagline {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-weight: 300;
-      font-size: var(--text-tagline);
-      color: var(--color-charcoal-mid);
+      font-size: clamp(8px, 1.6vw, 12px);
+      color: var(--char-mid);
       line-height: 1.65;
     }
 
-    /* Decorative dot grid */
-    .card__dots {
+    .dots {
       display: grid;
-      grid-template-columns: repeat(3, clamp(4px, 0.8vw, 6px));
-      gap: clamp(3px, 0.5vw, 5px);
+      grid-template-columns: repeat(3, clamp(3px, 0.7vw, 5px));
+      gap: clamp(2px, 0.4vw, 4px);
     }
-
-    .card__dot {
-      width:  clamp(4px, 0.8vw, 6px);
-      height: clamp(4px, 0.8vw, 6px);
+    .dot {
+      width: clamp(3px, 0.7vw, 5px);
+      height: clamp(3px, 0.7vw, 5px);
       border-radius: 50%;
-      background-color: var(--color-charcoal);
+      background: var(--charcoal);
       opacity: 0.1;
     }
+    .dot.on { opacity: 0.25; }
 
-    .card__dot--active { opacity: 0.25; }
-
-    /* ============================================================
-       8. BACK FACE
-       ============================================================ */
-    .card__face--back {
-      background-color: var(--color-surface-back);
+    /* ===== BACK ===== */
+    .card-back {
+      background: var(--dark);
+      /* back starts rotated 180deg — hidden by default */
       transform: rotateY(180deg);
       box-shadow:
-        0 clamp(16px, 3vw, 36px) clamp(40px, 8vw, 90px) rgba(0, 0, 0, 0.7),
-        0 0 0 1px rgba(255, 255, 255, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        0 20px 60px rgba(0,0,0,0.65),
+        0 0 0 1px rgba(255,255,255,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.03);
     }
 
-    /* Glow top-right */
-    .card__face--back::before {
+    .card-back::before {
       content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 90% 10%, rgba(212,206,201,0.07) 0%, transparent 50%);
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 88% 12%, rgba(212,206,201,0.07) 0%, transparent 50%);
       pointer-events: none;
     }
 
-    /* Left accent bar */
-    .card__face--back::after {
+    .card-back::after {
       content: '';
       position: absolute;
-      left: 0;
-      top: 18%;
-      bottom: 18%;
+      left: 0; top: 16%; bottom: 16%;
       width: 2px;
-      background: linear-gradient(to bottom, transparent, rgba(212,206,201,0.3), transparent);
+      background: linear-gradient(to bottom, transparent, rgba(212,206,201,0.25), transparent);
+      pointer-events: none;
     }
 
-    .card__back-inner {
-      position: relative;
-      z-index: 2;
-      padding: var(--pad-card-back) var(--pad-card-back) var(--pad-card-back) calc(var(--pad-card-back) + 6px);
+    .back-body {
+      position: relative; z-index: 1;
+      padding: clamp(14px, 3vw, 26px) clamp(14px, 3vw, 26px) clamp(14px, 3vw, 26px) clamp(18px, 3.5vw, 32px);
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
-    /* Back top row */
-    .card__back-top {
+    .back-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .card__back-wordmark {
+    .back-brand {
       font-family: 'DM Sans', sans-serif;
       font-weight: 200;
-      font-size: clamp(8px, 1.5vw, 12px);
-      letter-spacing: 0.4em;
+      font-size: clamp(7px, 1.3vw, 11px);
+      letter-spacing: 0.45em;
       text-transform: uppercase;
-      color: var(--color-taupe);
-      opacity: 0.5;
+      color: var(--taupe);
+      opacity: 0.45;
     }
 
-    .card__back-hint {
+    /* Flip back button */
+    .btn-back {
+      background: none;
+      border: none;
       font-family: 'Space Mono', monospace;
       font-size: clamp(6px, 1vw, 8px);
-      letter-spacing: 0.03em;
-      color: rgba(212, 206, 201, 0.25);
+      color: rgba(212,206,201,0.3);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      transition: color 0.2s, background 0.2s;
+      /* IMPORTANT: stop clicks from bubbling to card-wrap */
+    }
+    .btn-back:hover {
+      color: rgba(212,206,201,0.7);
+      background: rgba(212,206,201,0.06);
     }
 
-    /* ── Links grid: 2×2 ── */
-    .card__links {
+    /* ===== LINKS GRID ===== */
+    .links {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--gap-links);
+      gap: clamp(5px, 1vw, 9px);
       list-style: none;
       flex: 1;
       align-content: center;
-      margin-top: clamp(8px, 1.5vw, 14px);
+      margin-top: clamp(6px, 1.2vw, 12px);
     }
 
-    .card__link {
+    .link {
       display: flex;
       align-items: center;
-      gap: clamp(7px, 1.3vw, 12px);
-      padding: clamp(8px, 1.5vw, 13px) clamp(8px, 1.5vw, 14px);
-      border-radius: clamp(7px, 1.5vw, 12px);
+      gap: clamp(7px, 1.3vw, 11px);
+      padding: clamp(8px, 1.5vw, 12px) clamp(8px, 1.4vw, 12px);
+      border-radius: clamp(7px, 1.3vw, 11px);
       text-decoration: none;
-      background: rgba(212, 206, 201, 0.06);
-      border: 1px solid rgba(212, 206, 201, 0.1);
-      transition:
-        background-color  0.2s ease,
-        border-color      0.2s ease,
-        transform         0.15s ease;
+      background: rgba(212,206,201,0.06);
+      border: 1px solid rgba(212,206,201,0.1);
+      /* CRITICAL: stop click from bubbling to card-wrap */
+      position: relative;
+      transition: background 0.2s, border-color 0.2s, transform 0.18s, box-shadow 0.2s;
     }
 
-    .card__link:hover {
-      background-color: rgba(212, 206, 201, 0.12);
-      border-color: rgba(212, 206, 201, 0.2);
+    .link:hover {
+      background: rgba(212,206,201,0.13);
+      border-color: rgba(212,206,201,0.25);
       transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.28);
     }
 
-    .card__link:active  { transform: scale(0.97); }
+    .link:active { transform: scale(0.97); }
 
-    .card__link:focus-visible {
-      outline: 2px solid var(--color-taupe);
+    .link:focus-visible {
+      outline: 2px solid var(--taupe);
       outline-offset: 2px;
     }
 
-    /* Icon */
-    .card__link-icon {
-      width:  clamp(26px, 4.5vw, 38px);
-      height: clamp(26px, 4.5vw, 38px);
-      border-radius: clamp(6px, 1.2vw, 10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .link-icon {
+      width: clamp(26px, 4.5vw, 36px);
+      height: clamp(26px, 4.5vw, 36px);
+      border-radius: clamp(6px, 1vw, 9px);
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
+      transition: transform 0.18s;
     }
+    .link:hover .link-icon { transform: scale(1.08); }
+    .link-icon svg { width: clamp(12px, 2.2vw, 17px); height: clamp(12px, 2.2vw, 17px); }
 
-    .card__link-icon svg {
-      width:  clamp(12px, 2.2vw, 18px);
-      height: clamp(12px, 2.2vw, 18px);
-    }
+    .icon-wa { background: rgba(37,  211, 102, 0.14); }
+    .icon-em { background: rgba(212, 206, 201, 0.10); }
+    .icon-ig { background: rgba(193,  53, 132, 0.12); }
+    .icon-li { background: rgba(0,   119, 181, 0.12); }
 
-    /* Icon colour variants */
-    .card__link-icon--whatsapp  { background: rgba(37,  211, 102, 0.14); }
-    .card__link-icon--email     { background: rgba(212, 206, 201, 0.10); }
-    .card__link-icon--instagram { background: rgba(193,  53, 132, 0.12); }
-    .card__link-icon--linkedin  { background: rgba(0,   119, 181, 0.12); }
+    .link-text { flex: 1; min-width: 0; }
 
-    /* Text */
-    .card__link-text {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .card__link-label {
+    .link-name {
       display: block;
       font-family: 'DM Sans', sans-serif;
       font-weight: 500;
-      font-size: var(--text-link-label);
-      letter-spacing: 0.01em;
-      color: var(--color-text-on-dark);
+      font-size: clamp(10px, 1.9vw, 14px);
+      color: var(--text-light);
+      transition: color 0.2s;
     }
+    .link:hover .link-name { color: #fff; }
 
-    .card__link-sub {
+    .link-sub {
       display: block;
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: var(--text-link-sub);
-      color: var(--color-text-muted);
-      margin-top: 2px;
+      font-size: clamp(7px, 1.2vw, 10px);
+      color: var(--text-muted);
+      margin-top: 1px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      transition: color 0.2s;
     }
+    .link:hover .link-sub { color: rgba(212,206,201,0.7); }
 
-    /* ============================================================
-       9. TAP HINT & FOOTER
-       ============================================================ */
-    .page__tap-hint {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    /* ===== BOTTOM ===== */
+    .hint {
+      display: flex; align-items: center; gap: 8px;
       font-family: 'Space Mono', monospace;
-      font-size: clamp(7px, 1.2vw, 9px);
+      font-size: clamp(7px, 1.1vw, 9px);
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(212, 206, 201, 0.22);
-      opacity: 0;
-      animation: fadeUp var(--duration-fade) ease 0.55s forwards;
+      color: rgba(212,206,201,0.2);
       user-select: none;
       pointer-events: none;
+      animation: fadeUp 0.6s ease 0.5s both;
     }
-
-    .page__tap-hint-dot {
-      width: 3px;
-      height: 3px;
+    .hint-dot {
+      width: 3px; height: 3px;
       border-radius: 50%;
-      background-color: rgba(212, 206, 201, 0.22);
-      flex-shrink: 0;
+      background: rgba(212,206,201,0.2);
     }
 
-    .page__footer {
+    .footer {
       font-family: 'DM Sans', sans-serif;
       font-weight: 200;
-      font-size: clamp(8px, 1.2vw, 10px);
+      font-size: clamp(7px, 1.1vw, 10px);
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(212, 206, 201, 0.18);
-      opacity: 0;
-      animation: fadeUp var(--duration-fade) ease 0.65s forwards;
+      color: rgba(212,206,201,0.16);
+      animation: fadeUp 0.6s ease 0.6s both;
     }
 
-    /* ============================================================
-       10. ANIMATIONS
-       ============================================================ */
+    /* ===== ANIMATIONS ===== */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0);    }
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-10px); }
-      to   { opacity: 1; transform: translateY(0);     }
+      to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 
 <body>
-  <main class="page" role="main">
 
-    <!-- Page label -->
-    <p class="page__label" aria-hidden="true">Digital Card</p>
+  <p class="lbl" aria-hidden="true">Digital Card</p>
 
-    <!-- ── 3D Business Card ── -->
-    <div
-      class="card-scene"
-      id="js-card-scene"
-      role="button"
-      tabindex="0"
-      aria-label="Business card for Houssam Elkhalifi. Press Enter or Space to flip and reveal contact links."
-      aria-pressed="false"
-    >
-      <div class="card__flipper" id="js-card-flipper">
+  <!-- ======================================================
+       CARD WRAP — the perspective container
+       Clicking here flips the card (JS below intercepts
+       link & button clicks before they reach here)
+  ====================================================== -->
+  <div class="card-wrap" id="cardWrap" role="button" tabindex="0" aria-label="Business card. Click to flip.">
+    <div class="card-inner" id="cardInner">
 
-        <!-- FRONT -->
-        <article class="card__face card__face--front" aria-label="Front of business card">
-          <div class="card__front-inner">
+      <!-- FRONT -->
+      <div class="card-face card-front" aria-label="Card front">
+        <div class="front-body">
 
-            <header class="card__front-top">
-              <span class="card__wordmark">Automaestro</span>
-              <span class="card__flip-hint" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                  <path d="M1 4v6h6M23 20v-6h-6"/>
-                  <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 0 1 3.51 15"/>
-                </svg>
-                tap to flip
-              </span>
-            </header>
-
-            <section class="card__identity">
-              <h1 class="card__name">Houssam Elkhalifi</h1>
-              <hr class="card__rule" />
-              <p class="card__title">Automation Specialist</p>
-            </section>
-
-            <footer class="card__front-bottom">
-              <blockquote class="card__tagline">
-                "We build the systems.<br />You run the business."
-              </blockquote>
-              <div class="card__dots" aria-hidden="true">
-                <span class="card__dot card__dot--active"></span>
-                <span class="card__dot card__dot--active"></span>
-                <span class="card__dot"></span>
-                <span class="card__dot card__dot--active"></span>
-                <span class="card__dot"></span>
-                <span class="card__dot card__dot--active"></span>
-                <span class="card__dot"></span>
-                <span class="card__dot card__dot--active"></span>
-                <span class="card__dot card__dot--active"></span>
-              </div>
-            </footer>
-
+          <div class="front-top">
+            <span class="brand">Automaestro</span>
+            <span class="flip-hint" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 4v6h6M23 20v-6h-6"/>
+                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+              </svg>
+              tap to flip
+            </span>
           </div>
-        </article>
 
-        <!-- BACK -->
-        <article class="card__face card__face--back" aria-label="Back of business card with contact links">
-          <div class="card__back-inner">
-
-            <header class="card__back-top">
-              <span class="card__back-wordmark">Automaestro</span>
-              <span class="card__back-hint" aria-hidden="true">tap to flip</span>
-            </header>
-
-            <ul class="card__links" role="list">
-
-              <!-- WhatsApp -->
-              <li>
-                <a
-                  class="card__link"
-                  href="https://wa.me/212719329764"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Contact Houssam on WhatsApp"
-                >
-                  <span class="card__link-icon card__link-icon--whatsapp" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="#25D366"/>
-                      <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.659 1.438 5.168L2 22l4.978-1.418A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.946 7.946 0 01-4.274-1.243l-.306-.182-3.172.904.887-3.096-.2-.318A7.956 7.956 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z" fill="#25D366"/>
-                    </svg>
-                  </span>
-                  <span class="card__link-text">
-                    <span class="card__link-label">WhatsApp</span>
-                    <span class="card__link-sub">Send a message</span>
-                  </span>
-                </a>
-              </li>
-
-              <!-- Email -->
-              <li>
-                <a
-                  class="card__link"
-                  href="mailto:automaestro.contact@gmail.com"
-                  aria-label="Send an email to Automaestro"
-                >
-                  <span class="card__link-icon card__link-icon--email" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#E0DBD6" stroke-width="1.6" aria-hidden="true" focusable="false">
-                      <rect x="2" y="4" width="20" height="16" rx="2"/>
-                      <path d="m2 4 10 9 10-9"/>
-                    </svg>
-                  </span>
-                  <span class="card__link-text">
-                    <span class="card__link-label">Email</span>
-                    <span class="card__link-sub">automaestro.contact@gmail.com</span>
-                  </span>
-                </a>
-              </li>
-
-              <!-- Instagram -->
-              <li>
-                <a
-                  class="card__link"
-                  href="https://instagram.com/automaestro.ma"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Follow Automaestro on Instagram"
-                >
-                  <span class="card__link-icon card__link-icon--instagram" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="1.6" aria-hidden="true" focusable="false">
-                      <rect x="2" y="2" width="20" height="20" rx="5"/>
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round"/>
-                    </svg>
-                  </span>
-                  <span class="card__link-text">
-                    <span class="card__link-label">Instagram</span>
-                    <span class="card__link-sub">@automaestro.ma</span>
-                  </span>
-                </a>
-              </li>
-
-              <!-- LinkedIn -->
-              <li>
-                <a
-                  class="card__link"
-                  href="https://linkedin.com/in/houssam-elkhalifi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Connect with Houssam on LinkedIn"
-                >
-                  <span class="card__link-icon card__link-icon--linkedin" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#4DA6D0" stroke-width="1.6" aria-hidden="true" focusable="false">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                      <rect x="2" y="9" width="4" height="12"/>
-                      <circle cx="4" cy="4" r="2"/>
-                    </svg>
-                  </span>
-                  <span class="card__link-text">
-                    <span class="card__link-label">LinkedIn</span>
-                    <span class="card__link-sub">Houssam Elkhalifi</span>
-                  </span>
-                </a>
-              </li>
-
-            </ul>
-
+          <div class="identity">
+            <h1 class="person-name">Houssam Elkhalifi</h1>
+            <hr class="rule" />
+            <p class="person-title">Automation Specialist</p>
           </div>
-        </article>
 
+          <div class="front-bottom">
+            <blockquote class="tagline">
+              "We build the systems.<br />You run the business."
+            </blockquote>
+            <div class="dots" aria-hidden="true">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot"></span>
+              <span class="dot on"></span><span class="dot"></span><span class="dot on"></span>
+              <span class="dot"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+
+        </div>
       </div>
+
+      <!-- BACK -->
+      <div class="card-face card-back" aria-label="Card back — contact links">
+        <div class="back-body">
+
+          <div class="back-top">
+            <span class="back-brand">Automaestro</span>
+            <button class="btn-back" id="btnBack" aria-label="Flip back to front">↩ flip back</button>
+          </div>
+
+          <ul class="links" role="list">
+
+            <li>
+              <a class="link" href="https://wa.me/212719329764" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <span class="link-icon icon-wa" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="#25D366"/>
+                    <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.659 1.438 5.168L2 22l4.978-1.418A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.946 7.946 0 01-4.274-1.243l-.306-.182-3.172.904.887-3.096-.2-.318A7.956 7.956 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z" fill="#25D366"/>
+                  </svg>
+                </span>
+                <span class="link-text">
+                  <span class="link-name">WhatsApp</span>
+                  <span class="link-sub">Send a message</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="link" href="mailto:automaestro.contact@gmail.com" aria-label="Email">
+                <span class="link-icon icon-em" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#E0DBD6" stroke-width="1.6">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="m2 4 10 9 10-9"/>
+                  </svg>
+                </span>
+                <span class="link-text">
+                  <span class="link-name">Email</span>
+                  <span class="link-sub">automaestro.contact@gmail.com</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="link" href="https://instagram.com/automaestro.ma" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <span class="link-icon icon-ig" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="1.6">
+                    <rect x="2" y="2" width="20" height="20" rx="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="link-text">
+                  <span class="link-name">Instagram</span>
+                  <span class="link-sub">@automaestro.ma</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="link" href="https://linkedin.com/in/houssam-elkhalifi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <span class="link-icon icon-li" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#4DA6D0" stroke-width="1.6">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect x="2" y="9" width="4" height="12"/>
+                    <circle cx="4" cy="4" r="2"/>
+                  </svg>
+                </span>
+                <span class="link-text">
+                  <span class="link-name">LinkedIn</span>
+                  <span class="link-sub">Houssam Elkhalifi</span>
+                </span>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+
     </div>
-    <!-- ── End Card ── -->
+  </div>
 
-    <!-- Tap hint -->
-    <p class="page__tap-hint" aria-hidden="true">
-      <span class="page__tap-hint-dot"></span>
-      Tap card to reveal links
-      <span class="page__tap-hint-dot"></span>
-    </p>
+  <p class="hint" aria-hidden="true">
+    <span class="hint-dot"></span>
+    Tap card to flip
+    <span class="hint-dot"></span>
+  </p>
 
-    <!-- Footer -->
-    <footer>
-      <p class="page__footer">Automaestro &nbsp;·&nbsp; automaestro.vercel.app</p>
-    </footer>
+  <p class="footer">Automaestro &nbsp;·&nbsp; automaestro.vercel.app</p>
 
-  </main>
-
-  <!-- ============================================================
-       JAVASCRIPT — Card flip & 3D tilt
-       ============================================================ -->
   <script>
     (function () {
       'use strict';
 
-      /** @type {HTMLElement|null} */
-      const cardScene   = document.getElementById('js-card-scene');
-      /** @type {HTMLElement|null} */
-      const cardFlipper = document.getElementById('js-card-flipper');
+      var wrap  = document.getElementById('cardWrap');
+      var inner = document.getElementById('cardInner');
+      var btn   = document.getElementById('btnBack');
 
-      if (!cardScene || !cardFlipper) return;
+      /* ── flip state ── */
+      var flipped = false;
 
-      // ── Flip ────────────────────────────────────────────────
-      function flipCard() {
-        const isFlipped = cardScene.classList.toggle('card-scene--flipped');
-        cardScene.setAttribute('aria-pressed', String(isFlipped));
+      function doFlip() {
+        flipped = !flipped;
+        inner.classList.toggle('flipped', flipped);
       }
 
-      cardScene.addEventListener('click', flipCard);
+      /* ── card wrap click → flip ── */
+      wrap.addEventListener('click', doFlip);
 
-      cardScene.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          flipCard();
+      /* ── keyboard on wrap ── */
+      wrap.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          doFlip();
         }
       });
 
-      // ── 3D tilt (hover devices only) ────────────────────────
-      function handleMouseMove(event) {
-        if (cardScene.classList.contains('card-scene--flipped')) return;
+      /* ── btn-back click → flip back (stop bubble) ── */
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (flipped) doFlip();
+      });
 
-        const rect    = cardScene.getBoundingClientRect();
-        const centerX = rect.left + rect.width  / 2;
-        const centerY = rect.top  + rect.height / 2;
-        const deltaX  = (event.clientX - centerX) / (rect.width  / 2);
-        const deltaY  = (event.clientY - centerY) / (rect.height / 2);
-
-        cardFlipper.style.transform =
-          `rotateY(${deltaX * 10}deg) rotateX(${-deltaY * 6}deg)`;
-      }
-
-      function handleMouseLeave() {
-        if (cardScene.classList.contains('card-scene--flipped')) return;
-        cardFlipper.style.transform = '';
-      }
-
-      if (window.matchMedia('(hover: hover)').matches) {
-        cardScene.addEventListener('mousemove',  handleMouseMove);
-        cardScene.addEventListener('mouseleave', handleMouseLeave);
-      }
+      /* ── links stop bubble so they don't flip ── */
+      var links = wrap.querySelectorAll('a.link');
+      links.forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.stopPropagation();
+        });
+      });
 
     }());
   </script>
